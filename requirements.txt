@@ -1,0 +1,6 @@
+  # List of packages
+
+ipykernel
+faker
+pandas
+numpy
