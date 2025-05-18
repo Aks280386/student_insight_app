@@ -4,3 +4,8 @@ ipykernel
 faker
 pandas
 numpy
+streamlit
+sqlite3 
+matplotlib
+plotly
+seaborn
