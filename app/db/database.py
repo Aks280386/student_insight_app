@@ -2,7 +2,7 @@ import sqlite3
 import pandas as pd
 
 def get_connection():
-    return sqlite3.connect("data/school.db", check_same_thread=False)
+    return sqlite3.connect("./data/school.db", check_same_thread=False)
 
 def validate_login(username, password):
     conn = get_connection()
