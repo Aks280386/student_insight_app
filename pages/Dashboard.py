@@ -22,7 +22,7 @@ df = load_students()
 if st.session_state["role"] == "principal":
     # Show raw data
     if st.checkbox("Show Raw Data"):
-        st.dataframe(df)
+        st.dataframe(df.loc[df.groupby('studentid')['class'].idxmax()].sort_values('name'),hide_index=True)
 
     # Step 1: Create a label column for dropdown
     df['label'] = df['studentid'].astype(str) + " - " + df['name']
@@ -31,14 +31,14 @@ if st.session_state["role"] == "principal":
     label_to_id = dict(zip(df['label'], df['studentid'].astype(str)))
 
     # Step 3: Dropdown with student names + IDs
-    selected_label = st.selectbox("Select Student: ", df['label'],index=None,placeholder="Student ID or Name")
+    selected_label = st.selectbox("Select Student: ", df['label'].unique(),index=None,placeholder="Student ID or Name")
 
     if selected_label is not None:
         # Step 4: Get student record using mapped ID
         selected_id = label_to_id[selected_label]
 
-        # Analyze selected student
-        student = df[df['studentid'] == selected_id].iloc[0]
+        # Analyze selected student for the latest year(5th)
+        student = df[df['studentid'] == selected_id].iloc[4]
         causes = analyze_student(student)
         actions = recommend_actions(causes)
 
@@ -52,7 +52,7 @@ if st.session_state["role"] == "principal":
             st.write(", ".join(actions))
 
 # Show data for student
-elif st.session_state["role"] == "student":
+elif st.session_state["role"] == "Student":
     student = df[df['studentid'] == st.session_state['username']].iloc[0]
     causes = analyze_student(student)
     actions = recommend_actions(causes)
