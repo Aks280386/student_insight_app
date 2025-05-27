@@ -40,7 +40,7 @@ if selected_student:
         selected_subject = st.selectbox("Select Subject:", subject_options, index=0)
 
     def plot_overall(student_df, df):
-        st.subheader("📊 Overall Year-on-Year Performance (Total Marks)")
+        st.subheader("📊 Overall Performance")
 
         subjects = ['math_marks', 'science_marks']  # Add more subjects here if needed
         df['total_marks'] = df[subjects].sum(axis=1)
