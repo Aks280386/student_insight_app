@@ -52,7 +52,7 @@ if selected_student:
         merged = pd.merge(student_df[['academic_year', 'class', 'total_marks']], class_stats, on=['academic_year', 'class'], how='left')
 
         # Plotting
-        plt.figure(figsize=(15, 4))
+        plt.figure(figsize=(10, 4))
         sns.lineplot(data=merged, x='academic_year', y='total_marks', label='Student Total', marker='o', color='royalblue')
         sns.lineplot(data=merged, x='academic_year', y='class_avg', label='Class Avg Total', linestyle='--', marker='s', color='orange')
         sns.lineplot(data=merged, x='academic_year', y='class_max', label='Class Highest Total', linestyle=':', marker='^', color='green')
@@ -89,7 +89,7 @@ if selected_student:
         merged = pd.merge(student_df[['academic_year', 'class', subject]], class_stats, on=['academic_year', 'class'], how='left')
 
         # Plotting
-        plt.figure(figsize=(15, 4))
+        plt.figure(figsize=(10, 4))
         sns.lineplot(data=merged, x='academic_year', y=subject, label='Student', marker='o', color='royalblue')
         sns.lineplot(data=merged, x='academic_year', y='class_avg', label='Class Avg', linestyle='--', marker='s', color='orange')
         sns.lineplot(data=merged, x='academic_year', y='class_max', label='Class Highest', linestyle=':', marker='^', color='green')
