@@ -31,4 +31,4 @@ if not st.session_state["logged_in"]:
     st.stop()
 else:
     st.success(f"Logged in as {st.session_state['username']} ({st.session_state['role']})")
-    st.info("Please click on 'Dashboard' from the sidebar to continue.")
+    st.info("Please click on preferred page from the sidebar to continue.")
