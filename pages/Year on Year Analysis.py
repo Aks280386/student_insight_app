@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import ttest_1samp
 from app.db.database import get_connection
 
-st.title("📈 Year-on-Year Analysis")
+st.subheader("📈 Year-on-Year Analysis")
 
 # Load student data from database
 @st.cache_data
@@ -40,7 +40,7 @@ if selected_student:
         selected_subject = st.selectbox("Select Subject:", subject_options, index=0)
 
     def plot_overall(student_df, df):
-        st.subheader("📊 Overall Performance")
+        st.text("📊 Overall Performance")
 
         subjects = ['math_marks', 'science_marks']  # Add more subjects here if needed
         df['total_marks'] = df[subjects].sum(axis=1)
@@ -52,7 +52,7 @@ if selected_student:
         merged = pd.merge(student_df[['academic_year', 'class', 'total_marks']], class_stats, on=['academic_year', 'class'], how='left')
 
         # Plotting
-        plt.figure(figsize=(10, 4))
+        plt.figure(figsize=(15, 4))
         sns.lineplot(data=merged, x='academic_year', y='total_marks', label='Student Total', marker='o', color='royalblue')
         sns.lineplot(data=merged, x='academic_year', y='class_avg', label='Class Avg Total', linestyle='--', marker='s', color='orange')
         sns.lineplot(data=merged, x='academic_year', y='class_max', label='Class Highest Total', linestyle=':', marker='^', color='green')
@@ -82,14 +82,14 @@ if selected_student:
                 st.info("✅ Student's performance is similar to class average.")
 
     def plot_subject(student_df, df, subject):
-        st.subheader(f"📚 Year-on-Year Analysis for {subject_display.get(subject, subject.title())}")
+        st.text(f"📚{subject_display.get(subject, subject.title())} performance")
 
         class_stats = df.groupby(['academic_year', 'class'])[subject].agg(class_avg='mean', class_max='max').reset_index()
 
         merged = pd.merge(student_df[['academic_year', 'class', subject]], class_stats, on=['academic_year', 'class'], how='left')
 
         # Plotting
-        plt.figure(figsize=(10, 4))
+        plt.figure(figsize=(15, 4))
         sns.lineplot(data=merged, x='academic_year', y=subject, label='Student', marker='o', color='royalblue')
         sns.lineplot(data=merged, x='academic_year', y='class_avg', label='Class Avg', linestyle='--', marker='s', color='orange')
         sns.lineplot(data=merged, x='academic_year', y='class_max', label='Class Highest', linestyle=':', marker='^', color='green')
